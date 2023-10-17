@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        img {
+            position: fixed;
+            min-width: 100%;
+            min-height: 100%;
+            width: 125%;
+            height: 125%;
+            left:-10%;
+        }
+        .spotlight {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 40%;
+            background-color: rgba(255,255,255,0.1);
+            box-shadow: 0 0 100px 100px rgba(255,255,255,0.1);
+            pointer-events: none;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            var img = document.querySelector('img');
+            var spotlight = document.querySelector('.spotlight');
+            
+            var movementStrength = 25; // Change this value to increase or decrease the movement range
+            var height = movementStrength / window.innerHeight;
+            var width = movementStrength / window.innerWidth;
+
+            window.onmousemove = function(e) {
+                var pageX = e.clientX - (window.innerWidth / 2);
+                var pageY = e.clientY - (window.innerHeight / 2);
+                var newvalueX = width * pageX * -1 - 25;
+                var newvalueY = height * pageY * -1 - 50;
+
+                img.style.transform = "translate("+ newvalueX +"px, "+ newvalueY +"px)";
+
+                spotlight.style.left = e.pageX - 100 + 'px';
+                spotlight.style.top = e.pageY - 100 + 'px';
+            };
+        };
+    </script>
+</head>
+<body>
+    <img src="wallpapers.gif" alt="Your browser does not support the img tag."/>
+    <div class="spotlight"></div>
+</body>
+</html>
